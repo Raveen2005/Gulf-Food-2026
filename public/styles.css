@@ -14,3 +14,4 @@ th, td { text-align:left; padding:10px; border-bottom:1px solid #243246; }
 .suggestions { margin-top:8px; display:none; border:1px solid #243246; border-radius:10px; overflow:hidden; }
 .suggestions div { padding:10px; cursor:pointer; background:#0b0f14; }
 .suggestions div:hover { background:#162233; }
+.tableWrap { overflow-x: auto; }
