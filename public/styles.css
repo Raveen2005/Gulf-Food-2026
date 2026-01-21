@@ -1,0 +1,16 @@
+body { font-family: system-ui, Arial; margin: 0; background:#0b0f14; color:#e7eef7; }
+.wrap { max-width: 900px; margin: 40px auto; padding: 0 16px; }
+h1 { margin: 0 0 16px; font-size: 28px; }
+.card { background:#121a24; border:1px solid #243246; border-radius:14px; padding:16px; margin: 12px 0; }
+label { display:block; margin-bottom:8px; opacity:.9; }
+input { width:100%; padding:12px; border-radius:10px; border:1px solid #2a3a52; background:#0b0f14; color:#e7eef7; }
+button { margin-top:10px; padding:10px 14px; border:0; border-radius:10px; background:#2e7dff; color:white; cursor:pointer; }
+button:hover { filter: brightness(1.05); }
+table { width:100%; border-collapse: collapse; margin-top: 10px; }
+th, td { text-align:left; padding:10px; border-bottom:1px solid #243246; }
+.muted { opacity:.7; }
+.sep { opacity:.2; margin:14px 0; border:0; border-top:1px solid #243246; }
+
+.suggestions { margin-top:8px; display:none; border:1px solid #243246; border-radius:10px; overflow:hidden; }
+.suggestions div { padding:10px; cursor:pointer; background:#0b0f14; }
+.suggestions div:hover { background:#162233; }
