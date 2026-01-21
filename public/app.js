@@ -26,7 +26,7 @@ function showSuggestions(items) {
     suggestions.style.display = "none";
     return;
   }
-  items.slice(0, 8).forEach(g => {
+  items.slice(0, 10).forEach(g => {
     const d = document.createElement("div");
     d.textContent = g;
     d.onclick = () => {
@@ -39,26 +39,42 @@ function showSuggestions(items) {
   suggestions.style.display = "block";
 }
 
+function fmt(v) {
+  if (v === null || v === undefined || v === "") return "-";
+  const n = Number(v);
+  if (!Number.isFinite(n)) return String(v);
+  return n.toFixed(6); // matches your excel style
+}
+
 async function runSearch() {
   const grade = searchInput.value.trim();
   if (!grade) return;
 
   resultTitle.textContent = `Results for: ${grade}`;
-  resultsBody.innerHTML = `<tr><td colspan="2" class="muted">Loading...</td></tr>`;
+  resultsBody.innerHTML = `<tr><td colspan="8" class="muted">Loading...</td></tr>`;
 
   const rows = await fetchPrices(grade);
   if (rows.error) {
-    resultsBody.innerHTML = `<tr><td colspan="2">${escapeHtml(rows.error)}</td></tr>`;
+    resultsBody.innerHTML = `<tr><td colspan="8">${escapeHtml(rows.error)}</td></tr>`;
     return;
   }
   if (!rows.length) {
-    resultsBody.innerHTML = `<tr><td colspan="2" class="muted">No rows for this grade.</td></tr>`;
+    resultsBody.innerHTML = `<tr><td colspan="8" class="muted">No rows for this grade.</td></tr>`;
     return;
   }
 
-  resultsBody.innerHTML = rows.map(r =>
-    `<tr><td>${escapeHtml(String(r.std))}</td><td>${escapeHtml(String(r.price))}</td></tr>`
-  ).join("");
+  resultsBody.innerHTML = rows.map(r => `
+    <tr>
+      <td>${escapeHtml(String(r.std))}</td>
+      <td>${escapeHtml(fmt(r.bulk))}</td>
+      <td>${escapeHtml(fmt(r.kg10))}</td>
+      <td>${escapeHtml(fmt(r.kg5))}</td>
+      <td>${escapeHtml(fmt(r.carton_1kg))}</td>
+      <td>${escapeHtml(fmt(r.carton_500g))}</td>
+      <td>${escapeHtml(fmt(r.carton_250g))}</td>
+      <td>${escapeHtml(fmt(r.carton_100g))}</td>
+    </tr>
+  `).join("");
 }
 
 async function uploadExcel() {
@@ -69,8 +85,6 @@ async function uploadExcel() {
   }
 
   uploadMsg.textContent = "Uploading & importing...";
-  resultsBody.innerHTML = `<tr><td colspan="2" class="muted">Upload in progress...</td></tr>`;
-
   const fd = new FormData();
   fd.append("file", file);
 
@@ -79,14 +93,10 @@ async function uploadExcel() {
 
   if (!res.ok) {
     uploadMsg.textContent = data.error || "Upload failed";
-    resultsBody.innerHTML = `<tr><td colspan="2" class="muted">${escapeHtml(uploadMsg.textContent)}</td></tr>`;
     return;
   }
 
   uploadMsg.textContent = `Imported ${data.imported} rows ✅`;
-
-  // prefill suggestions immediately
-  suggestions.style.display = "none";
 }
 
 function escapeHtml(s) {
