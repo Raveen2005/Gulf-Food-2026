@@ -121,4 +121,4 @@ app.post("/api/prices", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Open http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
