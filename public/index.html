@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Grade Price Lookup</title>
+  <title>Gulf Food Price Lookup</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="wrap">
-    <h1>Grade → STD Price Lookup</h1>
+    <h1>Grade → Bulk / Pack Prices</h1>
 
     <div class="card">
-      <label>Upload Excel (needs columns: GRADE, STD, PRICE)</label>
+      <label>Upload Excel (GRADE, STD, Bulk, 10KG, 5KG, 1KG Carton, 500g, 250g, 100g)</label>
       <input id="excelFile" type="file" accept=".xlsx,.xls" />
       <button id="uploadBtn">Upload & Import</button>
       <p id="uploadMsg" class="muted"></p>
@@ -19,21 +19,32 @@
       <hr class="sep" />
 
       <label>Search grade</label>
-      <input id="gradeSearch" placeholder="Type grade (e.g., BOPF)" autocomplete="off" />
+      <input id="gradeSearch" placeholder="Type grade (e.g., OP1)" autocomplete="off" />
       <div id="suggestions" class="suggestions"></div>
       <button id="searchBtn">Search</button>
     </div>
 
     <div class="card">
       <h2 id="resultTitle">Results</h2>
-      <table>
-        <thead>
-          <tr><th>STD</th><th>PRICE</th></tr>
-        </thead>
-        <tbody id="resultsBody">
-          <tr><td colspan="2" class="muted">Upload an Excel file, then search a grade.</td></tr>
-        </tbody>
-      </table>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>STD</th>
+              <th>Bulk</th>
+              <th>10KG</th>
+              <th>5KG</th>
+              <th>1KG Carton</th>
+              <th>500g Carton</th>
+              <th>250g Carton</th>
+              <th>100g Carton</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody">
+            <tr><td colspan="8" class="muted">Upload Excel, then search a grade.</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
